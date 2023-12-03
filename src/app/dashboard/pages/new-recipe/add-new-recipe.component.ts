@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { RecipesService } from '../../services/recipes.service';
 import { Ingredientes } from '../../interfaces/ingredients.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
+import { Recipe } from '../../interfaces/recipes.interface';
 
 
 @Component({
@@ -36,34 +38,35 @@ export class AddNewRecipeComponent {
     {id: 'Al gusto', desc: 'Al gusto'}
   ]
 
-  public todosIngredientes: Ingredientes [] = [];
-  public nombre: string = '';
-  public unidad: string = '';
-  public cantidad: string = '';
-
   public myForm: FormGroup= this.fb.group({
     name:     ['', [ Validators.required ]],
     email:    ['', [ Validators.required, Validators.email ]],
     password: ['', [ Validators.required, Validators.minLength(6) ]],
   })
+
   public recipeForm = new FormGroup({
-    // id:               new FormControl<string>(''),
     title:            new FormControl<string>('', { nonNullable: true }),
     tipo:             new FormControl<string>(''),
-    tiempoElaboracion:new FormControl<string>('0'),
-    tiempoTotal:      new FormControl<string>('0'),
+    tiempoElaboracion:new FormControl<string>(''),
+    tiempoTotal:      new FormControl<string>(''),
 
     // INGREDIENTES
 
-    // nombre:           new FormControl<string>(''),
-    // unidadMedida:     new FormControl<string>(''),
-    // cantidad:         new FormControl<string>(''),
+    nombre:           new FormControl<string>(''),
+    unidadMedida:     new FormControl<string>(''),
+    cantidad:         new FormControl<string>(''),
 
     preparacion:      new FormControl<string>(''),
     grados:           new FormControl<string>(''),
-    tiempoCoccion:    new FormControl<string>('0'),
+    tiempoCoccion:    new FormControl<string>(''),
     alt_image:        new FormControl<string>(''),
   });
+
+
+  public todosIngredientes: Ingredientes [] = [];
+  public nombre: string = '';
+  public unidad: string = '';
+  public cantidad: string = '';
 
 
   goBack():void{
@@ -75,12 +78,58 @@ export class AddNewRecipeComponent {
     this.todosIngredientes.splice(index, 1);
   }
 
+  get currentRecipe(): Recipe{
+    const recipe = this.recipeForm.value as Recipe;
+    return recipe;
+  }
+
+  get currentIngredients(): Ingredientes{
+    const Ingredientes = this.recipeForm.value as Ingredientes;
+    return Ingredientes;
+  }
+
+  addIngrediente(){
+    if ( this.currentIngredients.nombre === '' || this.currentIngredients.unidadMedida === '' ) return;
+    if ( this.currentIngredients.nombre !== '' && this.currentIngredients.cantidad === ''  && this.currentIngredients.unidadMedida !== 'Al gusto') return;
+    if ( this.currentIngredients.nombre !== '' && this.currentIngredients.cantidad !== ''  && this.currentIngredients.unidadMedida === 'Al gusto') return;
+
+    if (this.currentIngredients.cantidad !== '' ){
+    this.todosIngredientes.push({
+      nombre: this.currentIngredients.nombre,
+      unidadMedida: this.currentIngredients.unidadMedida,
+      cantidad: this.currentIngredients.cantidad
+    });}
+    else {
+      this.todosIngredientes.push({
+        nombre: this.currentIngredients.nombre,
+        unidadMedida: this.currentIngredients.unidadMedida
+      });
+    }
+    //localStorage.setItem("Ingrediente", JSON.stringify(this.todosIngredientes));
+  }
+
   addRecipe(){
     const { tipo, title, preparacion, tiempoCoccion, grados, tiempoElaboracion, tiempoTotal, alt_image} = this.recipeForm.value;
     this.recipeService.addRecipe(tipo!, title!, preparacion!, tiempoCoccion!, grados!, tiempoElaboracion!, tiempoTotal!, alt_image! )
     .subscribe({
-      next: () => this.router.navigateByUrl('/dashboard/new-recipe'),
+      next: () => {
+        this.router.navigateByUrl('/dashboard/new-recipe')
+        Swal.fire({
+          text: "Receta grabada con éxito!",
+          icon: "success",
+          confirmButtonColor: '#FFC436',
+        });
+      },
+      error: () => {
+        Swal.fire(
+          {
+            title: 'Error!',
+            text: 'Todos los campos son obligatorios, excepto la imagen',
+            icon: 'error',
+            confirmButtonText: 'Cerrar',
+            confirmButtonColor: '#FFC436',
+          });
+      }
     })
-    console.log( this.recipeForm.value );
   }
 }

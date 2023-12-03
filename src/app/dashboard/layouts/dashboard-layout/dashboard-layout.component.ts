@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   templateUrl: './dashboard-layout.component.html',
-  styleUrls: ['./dashboard-layout.component.css']
 })
 export class DashboardLayoutComponent {
 
@@ -12,10 +11,6 @@ export class DashboardLayoutComponent {
   private router = inject( Router);
 
   public user = computed( ()=> this.authService.currentUser());
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-  ){}
 
   public sidebarItems = [
     {label: 'Recetas', icon:'label', url:'./list'},

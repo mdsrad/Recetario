@@ -14,6 +14,10 @@ export class ListPageComponent {
   constructor( private recipesService: RecipesService){
 
   }
+  ngOnInit(): void {
+    this.recipesService.getRecipes()
+    .subscribe( recipes => this.recipes = recipes );
+  }
 
 
 }

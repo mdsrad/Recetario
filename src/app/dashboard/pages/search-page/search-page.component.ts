@@ -16,4 +16,26 @@ export class SearchPageComponent {
   public recipes: Recipe[] = [];
   public selectedRecipe?: Recipe;
 
+  constructor( private recipeService: RecipesService){}
+
+  searchRecipe(){
+    const value: string = this.searchInput.value || '';
+
+    this.recipeService.getSuggestions( value )
+    .subscribe( recipes => this.recipes = recipes);
+  }
+
+  onSelectedOption( event: MatAutocompleteSelectedEvent): void{
+    if ( !event.option.value ){
+      this.selectedRecipe = undefined;
+      return;
+    }
+
+    const recipe: Recipe = event.option.value;
+    this.searchInput.setValue( recipe.title );
+
+    this.selectedRecipe = recipe;
+
+  }
+
 }
