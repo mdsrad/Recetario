@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "usuario": "Marta",
+      "email": "marta@gmail.com"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "TartaQueso",
+      "tipo": "dulce",
+      "title": "Tarta de queso",
+      "preparacion": "Mezclamos todos los ingredientes en un recipiente...",
+      "tiempoCoccion": 40,
+      "grados": 180,
+      "tiempoElaboracion": 15,
+      "tiempoTotal": 55,
+      "ingrediente": "Harina, Azúcar, Queso crema",
+      "unidadMedida": "Gramos, Gramos, Gramos",
+      "cantidad": "15, 140, 750",
+      "alt_image": null,
+      "ingredientes": "Harina, Huevos, Yogur"
+    },
+    {
+      "id": "BizcochoNaranja",
+      "tipo": "dulce",
+      "title": "Bizcocho de naranja",
+      "preparacion": "Mezclamos todos los ingredientes en un recipiente...",
+      "tiempoCoccion": 38,
+      "grados": 180,
+      "tiempoElaboracion": 10,
+      "tiempoTotal": 50,
+      "ingrediente": "Harina, Huevos, Yogur",
+      "unidadMedida": "Unidad de yogur, Unidad, kilogramos",
+      "cantidad": "3, 2, 1",
+      "ingredientes": "Harina, Huevos, Yogur"
+    }
+  ]
+}
