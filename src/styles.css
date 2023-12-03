@@ -283,6 +283,9 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
 }
+.example-spacer {
+  flex: 1 1 auto;
+}
 
 .wrap-login100-form-btn {
   width: 100%;
