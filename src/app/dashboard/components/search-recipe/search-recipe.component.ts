@@ -19,10 +19,6 @@ export class SearchRecipeComponent {
   constructor( private recipeService: RecipesService){}
 
   searchRecipe(){
-    const value: string = this.searchInput.value || '';
-
-    this.recipeService.getSuggestions( value )
-    .subscribe( recipes => this.recipes = recipes);
   }
 
   onSelectedOption( event: MatAutocompleteSelectedEvent): void{

@@ -24,7 +24,7 @@ export class DashboardLayoutComponent {
   ]
 
   goBack():void{
-    this.router.navigateByUrl('recipes/list')
+    this.router.navigateByUrl('dashboard/list')
   }
 
   onLogout(){

@@ -22,6 +22,6 @@ import { MaterialModule } from '../material/material.module';
     AuthRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
-  ]
+  ],
 })
 export class AuthModule { }

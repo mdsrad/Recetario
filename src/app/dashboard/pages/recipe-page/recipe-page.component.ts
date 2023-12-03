@@ -10,7 +10,7 @@ import { Ingredientes, Recipe } from '../../interfaces/recipes.interface';
   styles: [
   ]
 })
-export class RecipePageComponent implements OnInit{
+export class RecipePageComponent{
 
   public recipe?: Recipe;
   public todosIngredientes: Ingredientes [] = [];
@@ -21,32 +21,7 @@ export class RecipePageComponent implements OnInit{
     private router: Router,
   ){}
 
-  ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        //delay(800),
-        switchMap( ({ id })  => this.recipeService.getRecipeById( id )),
-      )
-      .subscribe( recipe => {
-        if ( !recipe ) return this.router.navigate([ '/recipes/list' ]);
-        this.recipe = recipe;
 
-        
-        this.recipe.ingrediente.split(', ').forEach(element => {
-          console.log(element);
-        });
-
-        this.recipe.cantidad.split(', ').forEach(element => {
-          console.log(element);
-        });
-
-        this.recipe.unidadMedida.split(', ').forEach(element => {
-          console.log(element);
-        });
-
-        return;
-      });
-  }
 
   goBack():void{
     this.router.navigateByUrl('recipes/list')

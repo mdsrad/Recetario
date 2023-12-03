@@ -25,20 +25,17 @@
 
   </mat-sidenav>
 
-  <mat-toolbar color="accent">
+  <mat-toolbar color="accent" style="float: inline-end;">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <button mat-button (click)="goBack()">
     <mat-icon>home</mat-icon></button>
-
-    <span class="spacer"></span>
-
-    <button mat-button>Logout</button>
-
+    <span class="spacer" ></span>
+    <button mat-button routerLink="/auth/login" >Login</button>
   </mat-toolbar>
 
-  <div class="container p-5">
+  <div class="container p-5" style="margin-top: 60px;">
     <router-outlet></router-outlet>
   </div>
 

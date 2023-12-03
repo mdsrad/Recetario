@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs';
   styles: [
   ]
 })
-export class AddNewRecipeComponent implements OnInit{
+export class AddNewRecipeComponent {
 
   public grados = [
     { id: 1, desc: '80º'}, { id: 2, desc: '90º'}, { id: 3, desc: '100º'}, { id: 4, desc: '110º'}, { id: 5, desc: '120º'},
@@ -61,89 +61,9 @@ export class AddNewRecipeComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
   ){}
 
-
-  ngOnInit(): void {
-
-    if ( !this.router.url.includes('edit')) return;
-    this.activatedRoute.params
-    .pipe(
-      switchMap( ({ id }) => this.recipeService.getRecipeById( id ) ),
-    ).subscribe( recipe => {
-      if ( !recipe ) return this.router.navigateByUrl('/');
-
-      this.recipeForm.reset( recipe );
-      return;
-    });
-  }
-
-    get currentRecipe(): Recipe{
-      const recipe = this.recipeForm.value as Recipe;
-      return recipe;
-    }
-
-    get currentIngredients(): Ingredientes{
-      const Ingredientes = this.recipeForm.value as Ingredientes;
-      return Ingredientes;
-    }
-
   goBack():void{
-    this.router.navigateByUrl('recipes/list')
+    this.router.navigateByUrl('dashboard/list')
   }
-
-  onSubmit(){
-
-    if( this.recipeForm.invalid ) return;
-
-    if ( this.currentRecipe.id ){
-      this.recipeService.updateRecipe( this.currentRecipe )
-        .subscribe( recipe => {
-          // TODO mostrar snackbar
-        });
-        return;
-    }
-
-    for (let index = 0; index < this.todosIngredientes.length; index++) {
-      const element = this.todosIngredientes[index];
-
-      if (index < this.todosIngredientes.length -1){
-        this.nombre += element.nombre + ',';
-        this.unidad += element.unidadMedida + ',';
-        this.cantidad += element.cantidad + ',';
-      }else {
-        this.nombre += element.nombre;
-        this.unidad += element.unidadMedida;
-        this.cantidad += element.cantidad;
-      }
-    }
-    this.currentRecipe.ingrediente = this.nombre;
-    this.currentRecipe.unidadMedida = this.unidad;
-    this.currentRecipe.cantidad = this.cantidad;
-    this.recipeService.addRecipe( this.currentRecipe )
-      .subscribe( recipe => {
-          // TODO mostrar snackbar
-      })
-  }
-
-  addIngrediente(){
-    if ( this.currentIngredients.nombre === '' || this.currentIngredients.unidadMedida === '' ) return;
-    if ( this.currentIngredients.nombre !== '' && this.currentIngredients.cantidad === 0  && this.currentIngredients.unidadMedida !== 'Al gusto') return;
-    if ( this.currentIngredients.nombre !== '' && this.currentIngredients.cantidad !== 0  && this.currentIngredients.unidadMedida === 'Al gusto') return;
-
-    if (this.currentIngredients.cantidad !== 0 ){
-    this.todosIngredientes.push({
-      nombre: this.currentIngredients.nombre,
-      unidadMedida: this.currentIngredients.unidadMedida,
-      cantidad: this.currentIngredients.cantidad
-    });}
-    else {
-      this.todosIngredientes.push({
-        nombre: this.currentIngredients.nombre,
-        unidadMedida: this.currentIngredients.unidadMedida
-      });
-    }
-    //localStorage.setItem("Ingrediente", JSON.stringify(this.todosIngredientes));
-  }
-
   eliminarIngrediente(nombre: string){
     const ingrAeliminar = nombre;
     const index = this.todosIngredientes.findIndex( x => x.nombre === ingrAeliminar );

@@ -6,6 +6,11 @@ import { Error404PageComponent } from './shared/pages/error404-page/error404-pag
 
 const routes: Routes = [
   {
+    path: 'dashboard/list',
+    canActivate: [ isNotAuthenticatedGuard ],
+    loadChildren: () => import('./dashboard/dashboard.module').then (m => m.DashboardModule),
+  },
+  {
     path: 'auth',
     canActivate: [isNotAuthenticatedGuard],
     loadChildren: () => import('./auth/auth.module').then (m => m.AuthModule),
@@ -23,11 +28,6 @@ const routes: Routes = [
     path: '404',
     component: Error404PageComponent,
   },
-  {
-    path: '',
-    redirectTo: 'recipes',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

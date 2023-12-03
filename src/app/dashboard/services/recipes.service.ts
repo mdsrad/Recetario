@@ -13,35 +13,25 @@ export class RecipesService {
   private baseUrl: string= environments.baseUrl;
   constructor(private http: HttpClient) { }
 
-  getRecipes(): Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(`${ this.baseUrl }/recipes`);
+  getRecipes(){
+
   }
 
-  getRecipeById( id: string ): Observable<Recipe|undefined>{
-    return this.http.get<Recipe>(`${ this.baseUrl }/recipes/${ id }`)
-      .pipe(
-        catchError( error => of( undefined) )
-    );
+  getRecipeById(){
+
   }
 
-  getSuggestions( query: string): Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(`${ this.baseUrl }/recipes?q=${ query }&_limit=12`);
+  getSuggestions(){
+
   }
 
-  addRecipe( recipe: Recipe ): Observable<Recipe>{
-    return this.http.post<Recipe>(`${ this.baseUrl }/recipes`, recipe );
+  addRecipe(){
   }
 
-  updateRecipe( recipe: Recipe ): Observable<Recipe>{
-    if ( !recipe.id ) throw Error('Recipe id is required');
-    return this.http.patch<Recipe>(`${ this.baseUrl }/recipes/${ recipe.id }`, recipe );
+  updateRecipe(){
   }
 
-  deleteRecipeById( id: string ): Observable<boolean>{
-    return this.http.delete(`${ this.baseUrl }/recipes/${ id }` )
-      .pipe(
-        catchError( err => of(false)),
-        map( resp => true)
-      );
+  deleteRecipeById(){
+
   }
 }
