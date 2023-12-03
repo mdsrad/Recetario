@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecipesService } from '../../services/recipes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay, switchMap } from 'rxjs';
-import { Ingredientes, Recipe } from '../../interfaces/recipes.interface';
+import { Recipe } from '../../interfaces/recipes.interface';
+import { Ingredientes } from '../../interfaces/ingredients.interface';
 
 @Component({
   selector: 'app-recipe-page',

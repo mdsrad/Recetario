@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
-import { AddNewRecipeComponent } from './pages/add-new-recipe/add-new-recipe.component';
+import { AddNewRecipeComponent } from './pages/new-recipe/add-new-recipe.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { RecipePageComponent } from './pages/recipe-page/recipe-page.component';

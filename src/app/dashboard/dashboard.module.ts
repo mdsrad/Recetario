@@ -7,7 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipePageComponent } from './pages/recipe-page/recipe-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
-import { AddNewRecipeComponent } from './pages/add-new-recipe/add-new-recipe.component';
+import { AddNewRecipeComponent } from './pages/new-recipe/add-new-recipe.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { CardComponent } from './components/card/card.component';
 import { RecipeImagePipe } from './pipes/recipe-image.pipe';

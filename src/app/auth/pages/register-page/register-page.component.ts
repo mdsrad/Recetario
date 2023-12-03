@@ -36,7 +36,7 @@ export class RegisterPageComponent {
           });
       }
     })
-    console.log( this.myForm.value );
+    //console.log( this.myForm.value );
   }
 
 }
