@@ -12,6 +12,4 @@
 ## Dev
 1. Clonar el proyecto (si hace falta)
 2. Ejecutar ```npm install```
-3. Intalar el backend ```npm install backend``` -- solo con backend de JSON 
-4. Levantar el backend ```npm run backend```  -- solo con backend de JSON 
 5. Ejecutar la app ```npm start``` o bien ```ng serve -o```s
